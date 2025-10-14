@@ -14,7 +14,7 @@ public class DungeonGen : MonoBehaviour
 
     [Header("World Sizes (정배수, 스케일 변경 없음)")]
     public float RoomSize = 20f;     // 방 외곽 길이
-    public float CorridorLen = 5f;   // 복도 길이
+    public float CorridorLen = 20f;   // 복도 길이
 
     [Header("Generation")]
     [Min(1)] public int maxRooms = 20;           // 전체 방 수 상한
@@ -31,10 +31,20 @@ public class DungeonGen : MonoBehaviour
 
     private float Pitch => RoomSize + CorridorLen;   // 방 중심 간 간격 = 25
 
+    // === 자료형 ===
+    public struct RoomData
+    {
+        public Vector3Int grid; // 피치 격자 좌표
+        public int doorMask;    // 4비트: X+, X-, Z+, Z-
+
+        public RoomData(Vector3Int g) { grid = g; doorMask = 0; }
+    }
+
     void Start()
     {
         if (autoGenerate) GenerateDungeon();
     }
+
 
     [ContextMenu("Generate Dungeon")]
     public void GenerateDungeon()
@@ -220,22 +230,13 @@ public class DungeonGen : MonoBehaviour
             }
         }
     }
-
-    // === 자료형 ===
-    public struct RoomData
-    {
-        public Vector3Int grid; // 피치 격자 좌표
-        public int doorMask;    // 4비트: X+, X-, Z+, Z-
-
-        public RoomData(Vector3Int g) { grid = g; doorMask = 0; }
-    }
 }
 
 // === 방향 유틸 ===
 public enum Dir { XPlus, XMinus, ZPlus, ZMinus }
 
 public static class DirUtil
-{
+{   
     public static Vector3Int Step(Dir d) => d switch
     {
         Dir.XPlus => new(1, 0, 0),
