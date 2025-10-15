@@ -29,7 +29,7 @@ public class DungeonGen : MonoBehaviour
     private readonly Dictionary<Vector3Int, RoomData> map = new();
     private readonly List<Vector3Int> frontier = new();
 
-    private float Pitch => RoomSize + CorridorLen;   // 방 중심 간 간격 = 25
+    private float Pitch => RoomSize + CorridorLen;
 
     // === 자료형 ===
     public struct RoomData
