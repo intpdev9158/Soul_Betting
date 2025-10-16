@@ -28,7 +28,9 @@ public class Projectile : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        if (target == null) { Destroy(gameObject); return; }
+
         if (Time.time - spawnTime > life) { Destroy(gameObject); return; }
         if (target == null || !target.IsAlive) { // 타겟이 죽었거나 없으면 직진 후 소멸
             transform.position += transform.forward * speed * Time.deltaTime;

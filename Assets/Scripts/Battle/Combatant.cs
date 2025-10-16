@@ -46,6 +46,10 @@ public class Combatant : MonoBehaviour, ITargetable
 
     public bool IsAlive => currentHP > 0;
 
+    private System.Func<List<Combatant>> enemyProvider;
+    public void SetEnemyProvider(System.Func<List<Combatant>> provider) => enemyProvider = provider;
+
+
     // 월드 기준 중심점(메시 피벗/오프셋과 무관하게 일관된 기준 제공)
     public Vector3 CenterPos
     {
@@ -78,7 +82,8 @@ public class Combatant : MonoBehaviour, ITargetable
     }
 
     private void Update()
-    {
+    {   
+        if (!this) return;
         if (!IsAlive) return;
         if (currentTarget == null || !currentTarget.IsAlive) return;
 

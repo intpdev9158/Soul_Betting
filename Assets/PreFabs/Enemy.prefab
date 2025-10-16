@@ -25,6 +25,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 163142718240489947, guid: 0f74dba0d73b177428a9412f35e0a67f, type: 3}
+      propertyPath: stats.MaxHP
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 163142718240489947, guid: 0f74dba0d73b177428a9412f35e0a67f, type: 3}
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 7026596141341314911, guid: 8d321b41c228b7e41951ef91d2401742, type: 3}
